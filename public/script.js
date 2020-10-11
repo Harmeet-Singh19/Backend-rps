@@ -1,5 +1,9 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
+const URL = "./new/";
+let model, webcam, labelContainer, maxPredictions;
+let show=0;
+let f=0;
 const myPeer = new Peer(undefined, {
   host: '/',
   port: '3001'
@@ -131,3 +135,86 @@ const setPlayVideo = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
+socket.on('otherstart',userId=>{
+  console.log("hello")
+  var timeleft = 5;
+var downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("countdown").innerHTML = "Finished";
+
+    show=1
+    console.log(f)
+    if(f==0){
+      init()
+      f=1;
+    }
+  } else {
+    document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+  }
+  timeleft -= 1;
+}, 1000);
+
+})
+
+          async function setShow(){
+            let sample
+            console.log("hi")
+            socket.emit('startcount',sample)
+            
+            /* show=1;
+             if(f==1){
+               init();
+               f=0;
+             }*/
+          }
+          // Load the image model and setup the webcam
+          async function init() {
+              const modelURL = URL + "model.json";
+              const metadataURL = URL + "metadata.json";
+  
+              console.log("init")
+              // load the model and metadata
+              // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+              // or files from your local hard drive
+              // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+              model = await tmImage.load(modelURL, metadataURL);
+              maxPredictions = model.getTotalClasses();
+             // await setShow()
+              // Convenience function to setup a webcam
+              const flip = true; // whether to flip the webcam
+              webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+              await webcam.setup(); // request access to the webcam
+              await webcam.play();
+              window.requestAnimationFrame(loop);
+              
+              // append elements to the DOM
+              
+              labelContainer = document.getElementById("label-container");
+              for (let i = 0; i < maxPredictions; i++) { // and class labels
+                  labelContainer.appendChild(document.createElement("div"));
+                  
+              }
+          }
+  
+          async function loop() {
+              webcam.update(); // update the webcam frame
+              await predict();
+              window.requestAnimationFrame(loop);
+          }
+  
+          // run the webcam image through the image model
+          async function predict() {
+              // predict can take in an image, video or canvas html element
+              if(show==1){
+              const prediction = await model.predict(webcam.canvas);
+              for (let i = 0; i < maxPredictions; i++) {
+                  const classPrediction =
+                      prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                  labelContainer.childNodes[i].innerHTML = classPrediction;
+                //  console.log(classPrediction);
+              }
+              show=0;
+              console.log("hi")
+            }
+          }
