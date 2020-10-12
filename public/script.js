@@ -4,11 +4,8 @@ const URL = "./new/";
 let model, webcam, labelContainer, maxPredictions;
 let show=0;
 let f=0;
-const myPeer = new Peer(undefined, {
-  path:'/peerjs',
-  host: 'localhost',
-  port: '3001'
-})
+const myPeer = new Peer({host:'rps-trial2.herokuapp.com', secure:true, port:443})
+console.log(myPeer)
 let myVideoStream;
 let myId;
 

@@ -3,9 +3,7 @@ const app = express()
 // const cors = require('cors')
 // app.use(cors())
 const server = require('http').Server(app)
-const { PeerServer } = require('peer');
 
-const peerServer = PeerServer({ port: process.env.PORT || 3001, path: '/peerjs' });
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
 
