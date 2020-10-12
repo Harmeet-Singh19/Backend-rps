@@ -9,6 +9,8 @@ const myPeer = new Peer(undefined, {
   port: '3001'
 })
 let myVideoStream;
+let myId;
+
 const myVideo = document.createElement('video')
 myVideo.muted = true;
 const peers = {}
@@ -27,6 +29,8 @@ navigator.mediaDevices.getUserMedia({
   })
 
   socket.on('user-connected', userId => {
+    myId=socket.id
+    console.log(myId)
     connectToNewUser(userId, stream)
   })
   // input value
@@ -156,6 +160,9 @@ var downloadTimer = setInterval(function(){
 }, 1000);
 
 })
+socket.on('OpponentScore',ans=>{
+  document.getElementById('oscore').innerHTML="Opponent had a " + ans
+})
 
           async function setShow(){
             let sample
@@ -208,13 +215,21 @@ var downloadTimer = setInterval(function(){
               // predict can take in an image, video or canvas html element
               if(show==1){
               const prediction = await model.predict(webcam.canvas);
+              let ans;
+              let max=0
               for (let i = 0; i < maxPredictions; i++) {
                   const classPrediction =
                       prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                   labelContainer.childNodes[i].innerHTML = classPrediction;
+                  if(prediction[i].probability.toFixed(2)>max){
+                    ans= prediction[i].className
+                  }
                 //  console.log(classPrediction);
               }
               show=0;
-              console.log("hi")
+             // console.log("hi")
+             
+             console.log(ans)
+             socket.emit('Result',ans,ROOM_ID)
             }
           }

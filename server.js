@@ -33,9 +33,15 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
       socket.to(roomId).broadcast.emit('user-disconnected', userId)
     })
+
     socket.on('startcount',(sample)=>{
       console.log("call recieve")
       io.to(roomId).emit('otherstart',userId)
+    })
+
+    socket.on('Result',(rps,roomId)=>{
+      console.log(rps)
+      socket.to(roomId).broadcast.emit('OpponentScore',rps)
     })
   })
 })
