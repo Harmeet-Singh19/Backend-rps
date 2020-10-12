@@ -5,7 +5,8 @@ let model, webcam, labelContainer, maxPredictions;
 let show=0;
 let f=0;
 const myPeer = new Peer(undefined, {
-  host: '/',
+  path:'/peerjs',
+  host: 'localhost',
   port: '3001'
 })
 let myVideoStream;
@@ -20,17 +21,20 @@ navigator.mediaDevices.getUserMedia({
 }).then(stream => {
   myVideoStream = stream;
   addVideoStream(myVideo, stream)
+  console.log("vid")
   myPeer.on('call', call => {
+    console.log("call answered")
     call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
+      console.log("stream")
       addVideoStream(video, userVideoStream)
     })
   })
 
   socket.on('user-connected', userId => {
     myId=socket.id
-    console.log(myId)
+    console.log(userId)
     connectToNewUser(userId, stream)
   })
   // input value
