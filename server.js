@@ -40,10 +40,10 @@ io.on('connection', socket => {
 
     socket.on('Result',(rps,roomId)=>{
       console.log(rps)
-      socket.to(roomId).broadcast.emit('OpponentScore',rps)
+      socket.to(roomId).emit('OpponentScore',rps)
     })
   })
 })
 
 
-server.listen(process.env.PORT||3000)
+server.listen(process.env.PORT||3030)
