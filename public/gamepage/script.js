@@ -1,6 +1,6 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
-const URL = "./new/";
+const URL = "../new/";
 let model, webcam, labelContainer, maxPredictions;
 let show=0;
 let f=0;
@@ -147,6 +147,8 @@ const setPlayVideo = () => {
 const clearScore=()=>{
   myScore=0;
   oppoScore=0;
+  document.getElementById("me").innerHTML="ME"+myScore
+  document.getElementById("oppo").innerHTML="Oppo"+oppoScore
 }
 socket.on('otherstart',userId=>{
   //console.log("hello")
@@ -175,7 +177,8 @@ socket.on('OpponentScore',ans=>{
   console.log(ans)
   console.log(myAns)
   if(myAns===ans){
-
+    myScore++;
+    oppoScore++;
   }
   else if(ans==="ROCK"){
     if(myAns==="PAPER"){
@@ -276,3 +279,4 @@ socket.on('OpponentScore',ans=>{
              socket.emit('Result',ans,ROOM_ID)
             }
           }
+

@@ -1,3 +1,4 @@
+
 const express = require('express')
 const app = express()
 // const cors = require('cors')
@@ -12,10 +13,12 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.redirect(`/${uuidV4()}`)
+  res.render('homepage')
 })
-
-app.get('/:room', (req, res) => {
+app.get('/game',(req,res)=>{
+  res.redirect(`/game/${uuidV4()}`)
+})
+app.get('/game/:room', (req, res) => {
   res.render('room', { roomId: req.params.room })
 })
 
@@ -34,12 +37,12 @@ io.on('connection', socket => {
     })
 
     socket.on('startcount',(sample)=>{
-      console.log("call recieve")
+      //console.log("call recieve")
       io.to(roomId).emit('otherstart',userId)
     })
 
     socket.on('Result',(rps,roomId)=>{
-      console.log(rps)
+     // console.log(rps)
       socket.to(roomId).emit('OpponentScore',rps)
     })
   })
