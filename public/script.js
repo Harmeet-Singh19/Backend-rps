@@ -5,9 +5,12 @@ let model, webcam, labelContainer, maxPredictions;
 let show=0;
 let f=0;
 const myPeer = new Peer({host:'rps-trial2.herokuapp.com', secure:true, port:443})
-console.log(myPeer)
+//console.log(myPeer)
 let myVideoStream;
 let myId;
+let myScore=0;
+let oppoScore=0;
+let myAns;
 
 const myVideo = document.createElement('video')
 myVideo.muted = true;
@@ -18,9 +21,9 @@ navigator.mediaDevices.getUserMedia({
 }).then(stream => {
   myVideoStream = stream;
   addVideoStream(myVideo, stream)
-  console.log("vid")
+ // console.log("vid")
   myPeer.on('call', call => {
-    console.log("call answered")
+   //// console.log("call answered")
     call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
@@ -31,7 +34,7 @@ navigator.mediaDevices.getUserMedia({
 
   socket.on('user-connected', userId => {
     myId=socket.id
-    console.log(userId)
+  //  console.log(userId)
     connectToNewUser(userId, stream)
   })
   // input value
@@ -140,8 +143,13 @@ const setPlayVideo = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
+
+const clearScore=()=>{
+  myScore=0;
+  oppoScore=0;
+}
 socket.on('otherstart',userId=>{
-  console.log("hello")
+  //console.log("hello")
   var timeleft = 5;
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
@@ -149,7 +157,7 @@ var downloadTimer = setInterval(function(){
     document.getElementById("countdown").innerHTML = "Finished";
 
     show=1
-    console.log(f)
+   // console.log(f)
     if(f==0){
       init()
       f=1;
@@ -163,6 +171,38 @@ var downloadTimer = setInterval(function(){
 })
 socket.on('OpponentScore',ans=>{
   document.getElementById('oscore').innerHTML="Opponent had a " + ans
+  myAns=myAns.toUpperCase()
+  console.log(ans)
+  console.log(myAns)
+  if(myAns===ans){
+
+  }
+  else if(ans==="ROCK"){
+    if(myAns==="PAPER"){
+      myScore++;
+    }
+    else {
+      oppoScore++;
+    }
+  }
+  else if( ans==="PAPER"){
+    if(myAns==="SCISSORS"){
+      myScore++;
+    }
+    else {
+      oppoScore++;
+    }
+  }
+  else{
+    if(myAns==="ROCK"){
+      myScore++;
+    }
+    else {
+      oppoScore++;
+    }
+  }
+  document.getElementById("me").innerHTML="ME"+myScore
+  document.getElementById("oppo").innerHTML="Oppo"+oppoScore
 })
 
           async function setShow(){
@@ -170,6 +210,7 @@ socket.on('OpponentScore',ans=>{
             console.log("hi")
             socket.emit('startcount',sample)
             
+
             /* show=1;
              if(f==1){
                init();
@@ -181,7 +222,7 @@ socket.on('OpponentScore',ans=>{
               const modelURL = URL + "model.json";
               const metadataURL = URL + "metadata.json";
   
-              console.log("init")
+             // console.log("init")
               // load the model and metadata
               // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
               // or files from your local hard drive
@@ -190,7 +231,7 @@ socket.on('OpponentScore',ans=>{
               maxPredictions = model.getTotalClasses();
              // await setShow()
               // Convenience function to setup a webcam
-              const flip = true; // whether to flip the webcam
+              const flip = false; // whether to flip the webcam
               webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
               await webcam.setup(); // request access to the webcam
               await webcam.play();
@@ -229,7 +270,8 @@ socket.on('OpponentScore',ans=>{
               }
               show=0;
              // console.log("hi")
-             
+             myAns=ans
+             ans=ans.toUpperCase();
              console.log(ans)
              socket.emit('Result',ans,ROOM_ID)
             }
