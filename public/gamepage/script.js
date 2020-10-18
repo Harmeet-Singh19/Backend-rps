@@ -20,6 +20,7 @@ navigator.mediaDevices.getUserMedia({
   audio: true
 }).then(stream => {
   myVideoStream = stream;
+  
   addVideoStream(myVideo, stream)
  // console.log("vid")
   myPeer.on('call', call => {
@@ -34,7 +35,8 @@ navigator.mediaDevices.getUserMedia({
 
   socket.on('user-connected', userId => {
     myId=socket.id
-  //  console.log(userId)
+ //   console.log(peers)
+  //console.log(peers.length)
     connectToNewUser(userId, stream)
   })
   // input value
@@ -51,9 +53,15 @@ navigator.mediaDevices.getUserMedia({
     scrollToBottom()
   })
 })
+socket.on('full',userId=>{
+  alert('This room is full!')
+  socket.emit('disconnect')
+  window.location.replace('/')
+})
 
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
+  console.log(peers)
 })
 
 myPeer.on('open', id => {
@@ -142,6 +150,10 @@ const setPlayVideo = () => {
     <span>Play Video</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
+}
+const leaveMeeting=()=>{
+  window.location.replace('/');
+  socket.emit('disconnect')
 }
 
 const clearScore=()=>{

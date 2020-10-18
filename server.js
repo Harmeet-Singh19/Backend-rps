@@ -24,13 +24,25 @@ app.get('/game/:room', (req, res) => {
 
 io.on('connection', socket => {
   socket.on('join-room', (roomId, userId) => {
-    socket.join(roomId)
-    socket.to(roomId).broadcast.emit('user-connected', userId);
-    // messages
-    socket.on('message', (message) => {
-      //send message to the same room
-      io.to(roomId).emit('createMessage', message)
-  }); 
+    var numClients
+    io.of('/').in(roomId).clients(function(error,clients){
+       numClients=clients.length;
+     // console.log(numClients)
+      if(numClients===2){
+       // console.log("full")
+        socket.emit('full', userId);
+      }
+      else{
+        
+        socket.join(roomId)
+        socket.to(roomId).broadcast.emit('user-connected', userId);
+        // messages
+        socket.on('message', (message) => {
+          //send message to the same room
+          io.to(roomId).emit('createMessage', message)
+      }); 
+    }
+  });
 
     socket.on('disconnect', () => {
       socket.to(roomId).broadcast.emit('user-disconnected', userId)
