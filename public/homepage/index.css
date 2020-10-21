@@ -148,3 +148,28 @@ li{
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
 }
+canvas {
+    display: block;
+  }
+
+#tsparticlesr{
+    position: absolute;
+    top: 10px;
+    left: -400px;
+    height: 100vh;
+    width: 100vw;
+}
+#tsparticless{
+    position: absolute;
+    top: 10px;
+    left: -100px;
+    height: 100vh;
+    width: 100vw;
+}
+#tsparticlesp{
+    left: 80px;
+    position: absolute;
+    top: 20px;
+    height: 100vh;
+    width: 100vw;
+}
