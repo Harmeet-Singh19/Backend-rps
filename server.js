@@ -13,7 +13,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.render('homepage')
+  res.render('homepagetemp')
 })
 app.get('/game',(req,res)=>{
   res.redirect(`/game/${uuidV4()}`)
