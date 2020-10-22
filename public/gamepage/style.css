@@ -1,9 +1,20 @@
+*{
+    box-sizing: border-box;
+}
+
+html,body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+
 .main {
     height: 100vh;
     display: flex;
     font-family: 'Lobster', cursive;
-
-
+    background-color: #1F2933;
+    overflow: hidden;
 }
 
 .main__left {
@@ -19,22 +30,23 @@
 
 .main__videos {
     flex-grow: 1;
-    background-color: black;
-    display: block;
+    
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 40px;
 }
 
 .score_div{
-    background-color: black;
+ 
     text-align: center;    
     color: white;
     
 }
 
 .score_info{
-    background-color: black;
+  
     text-align: center;    
     display: inline-flex;
     
@@ -59,10 +71,7 @@
     display: inline-block;
 }
 
-.main__controls {
-    /* background-color: #1C1E20; */
-    background-color: black;
-}
+
 
 .main__right {
     background-color: #242324;
@@ -85,9 +94,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    align-content: center;
+    text-align: center;
     padding: 8px 10px;
     min-width: 80px;
     cursor: pointer;
+    display: flex;
+    flex-direction:column;
 }
 
 .main__controls__button:hover {
@@ -113,12 +126,16 @@
 .main__chat_window {
     flex-grow: 1;
     overflow-y: auto;
+    width: 100%;
+    display: flex;  
+    flex-wrap: wrap;
 }
 
 .messages{
     color: white;
     list-style: none;
 }
+
 
 .main__message_container {
     padding: 22px 12px;
@@ -141,7 +158,187 @@
 }
 
 
-.switch-on{
-    /* border: 0.01px solid black;
-    background-color: black; */
+/*.switch-on{
+     border: 0.01px solid black;
+    background-color: black; 
+}
+*/
+.video-card{
+    border-radius: 20px;
+    background-color: #3E4C59;
+    width: 430px;
+    height: 330px;
+    align-items: center;
+    border: 3px solid #5b5daca8;
+   transition: 0.3s ease-in;
+   margin: 10px;
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+   flex-direction: row;
+}
+
+video{
+    height: 300px;
+         width: 400px;
+         object-fit: cover;
+         padding: 8px;
+    border-radius: 20px;
+}
+
+#copy{
+    margin-top: 30px;
+color: wheat;
+font-size: 14px;
+align-items: center;
+text-align: center;
+}
+#friendUrl{
+    font-size: 12px;
+    width: 350px;
+}
+
+
+#label-container{
+    display: flex;
+  
+}
+#output-grid {
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+ }
+ #video-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+ }
+
+ #output-grid h2 {
+   margin-right:30px ;
+ }
+
+ #rock,#paper,#scissor{
+     display: none;
+ }
+ #countdown{
+     position: absolute;
+     height: 100%;
+     width: 100vw;
+     opacity: 0.4;
+     background-color: black;
+     font-size: 8rem;
+     color: wheat;
+     font-family: 'Times New Roman', Times, serif;
+     text-align: center;
+     align-items: center;
+     align-content: center;
+     z-index: -1;
+     padding: 20%;
+ }
+@media(max-width:1300px){
+    .video-card{
+        width: 380px;
+    height: 280px;
+    }
+    video{
+        height: 250px;
+         width: 350px;
+    }
+    .main{
+        flex-direction: column;
+    }
+
+}
+@media(max-width:920px){
+    .video-card{
+        width: 280px;
+    height: 200px;
+    }
+    video{
+        height: 180px;
+         width: 250px;
+    }
+    
+    #output-grid{
+        width: 500px;
+    }
+    #output-grid > h2 {
+        
+       font-size: 16px;
+     }
+}
+
+@media(max-width:780px){
+    h2{
+        font-size: 14px;
+    }
+}
+
+@media(max-width:700px){
+    .video-card{
+        width: 230px;
+    height: 150px;
+    }
+    video{
+        height: 130px;
+         width: 200px;
+    }
+    span{
+        font-size: 12px;
+    }
+}
+@media(max-width:583px){
+    
+    #video-grid {
+      justify-content: left;
+     }
+
+
+    svg{
+        width: 1em;
+        height: 1em;
+    }
+    #friendUrl{
+        margin-bottom: 10px;
+    }
+    #output-grid{
+       float: right;
+       flex-direction: column;
+       position: absolute;
+       left: 60%;
+       top: 17%;
+       justify-content: space-around;
+       height: 300px;
+    }
+  
+   
+}
+@media(max-width:480px){
+    #video-grid{
+        flex-direction: column;
+        justify-content: left;
+        margin-left: 0px;
+    }
+    h2{
+        font-size: 10px;
+    }
+    #output-grid{
+        display: none;
+    }
+    span{
+        font-size: 10px;
+    }
+}
+
+@media(max-width:380px){
+    span{
+        font-size: 6px;
+    }
+    svg{
+        width: 0.87em;
+        height: 0.87em;
+    }
 }

@@ -1,6 +1,6 @@
 tsParticles.load("tsparticlesr", {
     detectRetina: false,
-    fpsLimit: 60,
+    fpsLimit: 100,
     interactivity: {
       detectsOn: "canvas",
       events: {
@@ -30,7 +30,7 @@ tsParticles.load("tsparticlesr", {
         }
       },
       lineLinked: {
-        blink: false,
+        blink: true,
         color: "random",
         consent: false,
         distance: 30,
@@ -134,7 +134,7 @@ tsParticles.load("tsparticlesr", {
         }
       },
       lineLinked: {
-        blink: false,
+        blink: true,
         color: "random",
         consent: false,
         distance: 30,
@@ -238,7 +238,7 @@ tsParticles.load("tsparticlesr", {
         }
       },
       lineLinked: {
-        blink: false,
+        blink: true,
         color: "random",
         consent: false,
         distance: 30,
@@ -264,7 +264,7 @@ tsParticles.load("tsparticlesr", {
       },
       number: {
         density: {
-          enable: false,
+          enable: true,
           area: 2000
         },
         limit: 0,

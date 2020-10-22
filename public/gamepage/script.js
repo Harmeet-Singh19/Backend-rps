@@ -15,44 +15,55 @@ let myScore = 0;
 let oppoScore = 0;
 let myAns;
 var count = 0;
+let p1=document.getElementById('rock').cloneNode(true);
+p1.id="rock2"
+let p2=document.getElementById('paper').cloneNode(true);
+p2.id="paper2"
+let p3=document.getElementById('scissor').cloneNode(true);
+p3.id="scissor2"
 
 const myVideo = document.createElement('video')
-const myMessage = document.createElement('h2')
-const myMessage2 = document.createElement('h2')
+const myMessage = document.createElement('div')
+const myMessage2 = document.createElement('div')
 const alonePLayerSupport = document.createElement('div');
 alonePLayerSupport.innerHTML = `<h2>Copy the below link and send it to your friend to invite them to the game</h2>
 <input type="text" id="friendUrl"></input>
-<button id='copy-button'>Copy</button>
+<button id='copy-button' onclick='copyText()'>Copy</button>
 `
+let x=document.createElement('h2')
+x.innerText="Output:"
+let y=document.createElement('h2')
+y.innerText="Output:"
+myMessage.append(x)
+myMessage.id="me"
+myMessage2.append(y)
 
-myMessage.innerHTML = "Output:"
-myMessage2.innerHTML = "Output:"
 myVideo.muted = true;
 const peers = {}
 
-// copyBtn.onclick = function () {
-//   friendUrl.select();
-//   document.execCommand('Copy');
 
-// }
+const callList = [];
 
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true
 }).then(stream => {
-  myVideoStream = stream;
 
-  addOutput(myMessage)
-  addVideoStream(myVideo, stream)
+  addCopy(alonePLayerSupport)
   // console.log("vid")
+  myVideoStream = stream;
+  addVideoStream(myVideo, stream)
   myPeer.on('call', call => {
-    //// console.log("call answered")
     call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
-      console.log("stream")
-      addVideoStream(video, userVideoStream)
-      addOutput(myMessage2)
+      if(!callList[call.peer]){
+        //console.log(userVideoStream)
+        addVideoStream(video, userVideoStream)
+        addOutput(myMessage)
+        addOutput(myMessage2)
+        callList[call.peer] = call;
+        }
     })
   })
 
@@ -61,18 +72,27 @@ navigator.mediaDevices.getUserMedia({
     //   console.log(peers)
     //console.log(peers.length)
     connectToNewUser(userId, stream)
+    addOutput(myMessage)
+    addOutput(myMessage2)
   })
   // input value
-  let text = $("input");
+  let text = $("#chat_message");
   // when press enter send message
   $('html').keydown(function (e) {
+    //console.log(text.val())
     if (e.which == 13 && text.val().length !== 0) {
-      socket.emit('message', text.val());
+      socket.emit('message', text.val(),socket.id);
       text.val('')
     }
   });
-  socket.on("createMessage", message => {
-    $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+  socket.on("createMessage", (message,userId) => {
+    console.log(message)
+    if(userId===socket.id){
+    $("ul").append(`<li class="message"><b>Me:</b>${message}</li><br>`);
+    }
+    else{
+      $("ul").append(`<li class="message"><b>Opponent:</b>${message}</li><br>`);
+    }
     scrollToBottom()
   })
 })
@@ -85,6 +105,11 @@ socket.on('full', userId => {
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
   console.log(peers)
+  videoGrid.removeChild(videoGrid.childNodes[2])
+  myMessage.remove()
+  myMessage2.remove();
+  
+  count=0;
 })
 
 myPeer.on('open', id => {
@@ -94,11 +119,17 @@ myPeer.on('open', id => {
 function connectToNewUser(userId, stream) {
   const call = myPeer.call(userId, stream)
   const video = document.createElement('video')
+  //console.log("u")
   call.on('stream', userVideoStream => {
+    if(!callList[call.peer]){
+    //console.log(userVideoStream)
     addVideoStream(video, userVideoStream)
+    callList[call.peer] = call;
+    }
   })
   call.on('close', () => {
     video.remove()
+    count=0
   })
 
   peers[userId] = call
@@ -107,25 +138,35 @@ function connectToNewUser(userId, stream) {
 function addVideoStream(video, stream) {
   count++;
 
-  if (count == 2) {
+  if (count === 2) {
     document.getElementsByClassName('main')[0].style.fontFamily = "'Press Start 2P', cursive"
+    alonePLayerSupport.remove();
   }
 
   video.srcObject = stream
   video.addEventListener('loadedmetadata', () => {
     video.play()
   })
-  videoGrid.append(video)
-
-
-
-
-
-
+  let newvcard=document.createElement('div')
+  newvcard.classList.add("video-card");
+  newvcard.append(video)
+  
+  if(newvcard.childNodes[0].nodeName!=='video'){
+  
+  videoGrid.append(newvcard)
+  
+ // console.log(video)
+  }
 }
 
 function addOutput(message) {
+  
   outputGrid.append(message)
+
+}
+function addCopy(ele){
+  document.getElementById('copy').append(ele)
+  document.getElementById('friendUrl').value=document.URL
 }
 
 
@@ -210,33 +251,59 @@ const clearScore = () => {
   document.getElementById("me").innerHTML = "ME" + myScore
   document.getElementById("oppo").innerHTML = "Oppo" + oppoScore
 }
+const copyText=()=>{
+  const el = document.createElement('textarea');
+  el.value = document.getElementById('friendUrl').value;
+  el.setAttribute('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+  console.log("copied")
+}
 socket.on('otherstart', userId => {
-  //console.log("hello")
+  console.log("hello")
   var timeleft = 5;
+  document.getElementsByClassName("main")[0].blur()
+  document.getElementById("countdown").style.zIndex=1
+  document.getElementById("countdown").style.opacity=0.7
+  var audio = new Audio("/gamepage/img/camera-shutter-click-01.mp3");
+  
   var downloadTimer = setInterval(function () {
     if (timeleft <= 0) {
       clearInterval(downloadTimer);
-      document.getElementById("countdown").innerHTML = "Finished";
-
+      document.getElementById("countdown").style.opacity = 0;
+      document.getElementById("countdown").style.zIndex=-1
+      document.getElementById("countdown").innerHTML = 5 ;
       show = 1
       // console.log(f)
       if (f == 0) {
         init()
         f = 1;
       }
-    } else {
-      document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+    }else if(timeleft===1){
+      document.getElementById("countdown").style.fontSize="5rem"
+      audio.play();
+      document.getElementById("countdown").innerHTML = "Capturing..." ;
+
+    }
+     else  {
+      document.getElementById("countdown").innerHTML = timeleft ;
     }
     timeleft -= 1;
   }, 1000);
 
 })
 socket.on('OpponentScore', ans => {
-  document.getElementById('oscore').innerHTML = "Opponent had a " + ans
-
+  
+  //console.log(myAns)
   myAns = myAns.toUpperCase()
-  console.log(ans)
-  console.log(myAns)
+  //console.log(ans)
+  //console.log(myAns)
+  //console.log(document.getElementById('me').append(p1)) 
+ 
   if (myAns === ans) {
     myScore++;
     oppoScore++;
@@ -265,15 +332,19 @@ socket.on('OpponentScore', ans => {
       oppoScore++;
     }
   }
-  document.getElementById("me").innerHTML = "ME" + myScore
-  document.getElementById("oppo").innerHTML = "Oppo" + oppoScore
+  document.getElementById("score_player1").innerHTML =  myScore
+  document.getElementById("score_player2").innerHTML =  oppoScore
 })
 
 async function setShow() {
+  if(count===2){
   let sample
   console.log("hi")
   socket.emit('startcount', sample)
-
+  }
+  else{
+    alert('Only one person is the lobby !')
+  }
 
   /* show=1;
    if(f==1){
@@ -295,7 +366,7 @@ async function init() {
   maxPredictions = model.getTotalClasses();
   // await setShow()
   // Convenience function to setup a webcam
-  const flip = false; // whether to flip the webcam
+  const flip = true; // whether to flip the webcam
   webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
   await webcam.setup(); // request access to the webcam
   await webcam.play();
@@ -303,11 +374,8 @@ async function init() {
 
   // append elements to the DOM
 
-  labelContainer = document.getElementById("label-container");
-  for (let i = 0; i < maxPredictions; i++) { // and class labels
-    labelContainer.appendChild(document.createElement("div"));
 
-  }
+
 }
 
 async function loop() {
@@ -326,7 +394,7 @@ async function predict() {
     for (let i = 0; i < maxPredictions; i++) {
       const classPrediction =
         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-      labelContainer.childNodes[i].innerHTML = classPrediction;
+    console.log(prediction[i])
       if (prediction[i].probability.toFixed(2) > max) {
         ans = prediction[i].className
       }
@@ -336,7 +404,7 @@ async function predict() {
     // console.log("hi")
     myAns = ans
     ans = ans.toUpperCase();
-    console.log(ans)
+    console.log(ans);
     socket.emit('Result', ans, ROOM_ID)
   }
 }

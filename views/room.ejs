@@ -23,47 +23,33 @@
    <script src="/gamepage/script.js" defer></script>
    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-   <style>
-      #video-grid {
-         display: flex;
-         justify-content: center;
-         flex-wrap: wrap;
-      }
-
-      video {
-         height: 300px;
-         width: 400px;
-         object-fit: cover;
-         padding: 8px;
-      }
-
-      #output-grid {
-         display: flex;
-
-
-         color: white;
-      }
-
-      #output-grid h2 {
-         margin: auto;
-      }
-   </style>
+   <script src="https://cdn.jsdelivr.net/npm/pathseg@1.2.0/pathseg.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@1.18.3/dist/tsparticles.min.js"></script>
+ 
 </head>
 
 <body>
-   <div class="main">
+   <div id="rock">
 
+   </div>
+   <div id="paper">
+
+   </div>
+   <div id="scissor">
+
+   </div>
+   <div class="main">
+      <div id="countdown"></div>
       <div class="main__left">
          <div class="score_div">
             <h1 style="color: yellow;">SCORE</h1>
             <div class="score_info">
-               <h2 class="score_board">Player1 : <h2 id="score_player1"> 1</h2>
+               <h2 class="score_board">Player1 : <h2 id="score_player1"> 0</h2>
                </h2>
-               <h2 class="score_board2">Player2 : <h2 id="score_player2"> 1</h2>
+               <h2 class="score_board2">Player2 : <h2 id="score_player2"> 0</h2>
                </h2>
-
             </div>
-
+            
 
 
          </div>
@@ -71,15 +57,24 @@
 
          <div class="main__videos">
             <div id="video-grid">
-
+               
             </div>
-
-            <div id="output-grid">
-
+            <div id="second">
+               <div id="output-grid">
+                  
+               </div>
+               <div id="label-container">
+   
+               </div>
+               
+               <div id="copy">
+   
+               </div>
             </div>
+            
          </div>
 
-
+         
 
 
 
@@ -92,7 +87,7 @@
                      <path fill-rule="evenodd"
                         d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z" />
                   </svg>
-
+                  <span>Mic Off</span>
                </div>
                <div onclick="playStop()" class="main__controls__button main__video_button">
                   <svg class="switch-on" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-camera-video-fill"
@@ -100,7 +95,7 @@
                      <path fill-rule="evenodd"
                         d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5z" />
                   </svg>
-
+                  <span>Camera Off</span>
                </div>
             </div>
             <div class="main__controls__block">
@@ -111,10 +106,10 @@
                      <path fill-rule="evenodd"
                         d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z" />
                   </svg>
-
+                  <span>Start Game</span>
                </div>
-               <div class="main__controls__button" onclick="clearScore()">
-                  <i class="fa fa-refresh switch-on" aria-hidden="true"></i>
+               <div class="main__controls__button" onclick="clearScore()" >
+                  <i class="fa fa-refresh switch-on" aria-hidden="true"></i><span>Reset Score</span>
 
                </div>
 
@@ -126,7 +121,7 @@
                      <path fill-rule="evenodd"
                         d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                   </svg>
-
+                  <span>Leave Meeting</span>
                </div>
             </div>
          </div>
