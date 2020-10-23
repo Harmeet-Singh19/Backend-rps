@@ -410,12 +410,12 @@ socket.on('sOpponentScore', ans => {
 })
 
 async function setShow() {
-  let times=1;
+  let times=0;
   let sample
   //console.log("game")
   socket.emit('startcount', sample)
   var game= setInterval(function(){
-    if(times!=1){
+    if(times!=5){
       let sample
   //console.log("game")
   socket.emit('startcount', sample)
