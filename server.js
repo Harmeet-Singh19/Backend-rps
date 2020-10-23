@@ -25,6 +25,7 @@ app.get('/game/:room', (req, res) => {
 io.on('connection', socket => {
   socket.on('join-room', (roomId, userId) => {
     var numClients
+    
     io.of('/').in(roomId).clients(function(error,clients){
        numClients=clients.length;
      // console.log(numClients)
@@ -54,9 +55,21 @@ io.on('connection', socket => {
       io.to(roomId).emit('otherstart',userId)
     })
 
-    socket.on('Result',(rps,roomId)=>{
+    socket.on('Result',async(rps,roomId)=>{
      // console.log(rps)
-      socket.to(roomId).emit('OpponentScore',rps)
+     await socket.emit('myB',rps)
+     await  socket.to(roomId).emit('OpponentScore',rps)
+     
+    })
+    socket.on('sstartcount',(sample)=>{
+      //console.log("call recieve")
+      
+      io.to(roomId).emit('sotherstart',userId)
+    })
+   
+    socket.on('sResult',(rps,roomId)=>{
+     // console.log(rps)
+      socket.to(roomId).emit('sOpponentScore',rps)
     })
   })
 })

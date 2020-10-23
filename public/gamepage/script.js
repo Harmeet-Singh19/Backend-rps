@@ -14,6 +14,7 @@ let myId;
 let myScore = 0;
 let oppoScore = 0;
 let myAns;
+let ms
 var count = 0;
 let p1=document.getElementById('rock').cloneNode(true);
 p1.id="rock2"
@@ -21,13 +22,23 @@ let p2=document.getElementById('paper').cloneNode(true);
 p2.id="paper2"
 let p3=document.getElementById('scissor').cloneNode(true);
 p3.id="scissor2"
+var modal = document.querySelector(".modal");
+var modalcontent=document.querySelector('.modal-content')
+
+
+const toggleModal=()=> {
+  console.log("t")
+    modal.classList.toggle("show-modal");
+}
+
+
 
 const myVideo = document.createElement('video')
 const myMessage = document.createElement('div')
 const myMessage2 = document.createElement('div')
 const alonePLayerSupport = document.createElement('div');
-alonePLayerSupport.innerHTML = `<h2>Copy the below link and send it to your friend to invite them to the game</h2>
-<input type="text" id="friendUrl"></input>
+alonePLayerSupport.innerHTML = `<div class="copytext">Copy the below link and send it to your friend to invite them to the game</div>
+<input type="text" id="friendUrl" readonly></input>
 <button id='copy-button' onclick='copyText()'>Copy</button>
 `
 let x=document.createElement('h2')
@@ -37,6 +48,7 @@ y.innerText="Output:"
 myMessage.append(x)
 myMessage.id="me"
 myMessage2.append(y)
+myMessage2.id="oppo"
 
 myVideo.muted = true;
 const peers = {}
@@ -62,6 +74,7 @@ navigator.mediaDevices.getUserMedia({
         addVideoStream(video, userVideoStream)
         addOutput(myMessage)
         addOutput(myMessage2)
+        //ssetShow()
         callList[call.peer] = call;
         }
     })
@@ -104,11 +117,11 @@ socket.on('full', userId => {
 
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
-  console.log(peers)
+  console.log("disc")
   videoGrid.removeChild(videoGrid.childNodes[2])
   myMessage.remove()
   myMessage2.remove();
-  
+  window.location.reload();
   count=0;
 })
 
@@ -125,6 +138,7 @@ function connectToNewUser(userId, stream) {
     //console.log(userVideoStream)
     addVideoStream(video, userVideoStream)
     callList[call.peer] = call;
+    ssetShow()
     }
   })
   call.on('close', () => {
@@ -139,7 +153,6 @@ function addVideoStream(video, stream) {
   count++;
 
   if (count === 2) {
-    document.getElementsByClassName('main')[0].style.fontFamily = "'Press Start 2P', cursive"
     alonePLayerSupport.remove();
   }
 
@@ -186,6 +199,7 @@ const muteUnmute = () => {
     setMuteButton();
     myVideoStream.getAudioTracks()[0].enabled = true;
   }
+  
 }
 
 const playStop = () => {
@@ -206,7 +220,7 @@ const setMuteButton = () => {
   <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
   <path fill-rule="evenodd" d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
 </svg>
-    
+<span>Mic Off</span>
   `
   document.querySelector('.main__mute_button').innerHTML = html;
 }
@@ -216,7 +230,7 @@ const setUnmuteButton = () => {
     <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-mic-mute-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M12.734 9.613A4.995 4.995 0 0 0 13 8V7a.5.5 0 0 0-1 0v1c0 .274-.027.54-.08.799l.814.814zm-2.522 1.72A4 4 0 0 1 4 8V7a.5.5 0 0 0-1 0v1a5 5 0 0 0 4.5 4.975V15h-3a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-3v-2.025a4.973 4.973 0 0 0 2.43-.923l-.718-.719zM11 7.88V3a3 3 0 0 0-5.842-.963L11 7.879zM5 6.12l4.486 4.486A3 3 0 0 1 5 8V6.121zm8.646 7.234l-12-12 .708-.708 12 12-.708.707z"/>
 </svg>
-    
+<span>Mic Off</span>
   `
   document.querySelector('.main__mute_button').innerHTML = html;
 }
@@ -228,6 +242,7 @@ const setStopVideo = () => {
                      <path fill-rule="evenodd"
                         d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5z" />
                   </svg>
+                  <span>Camera Off</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
@@ -237,6 +252,7 @@ const setPlayVideo = () => {
   <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-camera-video-off-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M10.961 12.365a1.99 1.99 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l6.69 9.365zm-10.114-9A2.001 2.001 0 0 0 0 5v6a2 2 0 0 0 2 2h5.728L.847 3.366zm9.746 11.925l-10-14 .814-.58 10 14-.814.58z"/>
 </svg>
+<span>Camera Off</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
@@ -248,8 +264,8 @@ const leaveMeeting = () => {
 const clearScore = () => {
   myScore = 0;
   oppoScore = 0;
-  document.getElementById("me").innerHTML = "ME" + myScore
-  document.getElementById("oppo").innerHTML = "Oppo" + oppoScore
+  document.getElementById("score_player1").innerHTML = myScore
+  document.getElementById("score_player2").innerHTML = oppoScore
 }
 const copyText=()=>{
   const el = document.createElement('textarea');
@@ -264,7 +280,7 @@ const copyText=()=>{
   console.log("copied")
 }
 socket.on('otherstart', userId => {
-  console.log("hello")
+ // console.log("hello")
   var timeleft = 5;
   document.getElementsByClassName("main")[0].blur()
   document.getElementById("countdown").style.zIndex=1
@@ -277,7 +293,7 @@ socket.on('otherstart', userId => {
       document.getElementById("countdown").style.opacity = 0;
       document.getElementById("countdown").style.zIndex=-1
       document.getElementById("countdown").innerHTML = 5 ;
-      show = 1
+      
       // console.log(f)
       if (f == 0) {
         init()
@@ -286,6 +302,7 @@ socket.on('otherstart', userId => {
     }else if(timeleft===1){
       document.getElementById("countdown").style.fontSize="5rem"
       audio.play();
+      show = 1
       document.getElementById("countdown").innerHTML = "Capturing..." ;
 
     }
@@ -296,62 +313,132 @@ socket.on('otherstart', userId => {
   }, 1000);
 
 })
-socket.on('OpponentScore', ans => {
-  
+socket.on('sotherstart', userId => {
+  // console.log("hello")
+   var timeleft = 2;
+   
+   var downloadTimer = setInterval(function () {
+     if (timeleft <= 0) {
+       clearInterval(downloadTimer);
+     
+       show = 1
+       // console.log(f)
+       if (f == 0) {
+         init()
+         
+       }
+     }
+      
+     timeleft -= 1;
+   }, 1000);
+ 
+ })
+ 
+socket.on('OpponentScore', async(ans) => {
+  await socket.on('myB',ans=>{
+    console.log("me")
+    myAns=ans
+  })
   //console.log(myAns)
+
   myAns = myAns.toUpperCase()
-  //console.log(ans)
-  //console.log(myAns)
+  console.log(ans+"o")
+  console.log(myAns+"me")
   //console.log(document.getElementById('me').append(p1)) 
  
   if (myAns === ans) {
     myScore++;
     oppoScore++;
+    modalcontent.innerHTML=`<h2>It was a Draw!</h2>`
   }
   else if (ans === "ROCK") {
     if (myAns === "PAPER") {
       myScore++;
+      modalcontent.innerHTML=`<h2>You won!!</h2>`
     }
     else {
       oppoScore++;
+      modalcontent.innerHTML=`<h2>Oops, You lost!!</h2>`
     }
   }
   else if (ans === "PAPER") {
     if (myAns === "SCISSORS") {
       myScore++;
+      modalcontent.innerHTML=`<h2>You won!!</h2>`
     }
     else {
+      modalcontent.innerHTML=`<h2>Oops, You lost!!</h2>`
       oppoScore++;
     }
   }
   else {
     if (myAns === "ROCK") {
       myScore++;
+      modalcontent.innerHTML=`<h2>You won!!</h2>`
     }
     else {
+      modalcontent.innerHTML=`<h2>Oops, You lost!!</h2>`
       oppoScore++;
     }
   }
+  let time=1;
+
+  toggleModal()
+  var modalp=setInterval(function(){
+    if(time===0){
+      clearInterval(modalp)
+      
+    }
+    else{
+      toggleModal()
+    }
+    time--;
+  },3500)
+  document.getElementById('me').innerHTML=`<h2>Output :${myAns}</h2>`
+  document.getElementById('oppo').innerHTML=`<h2>Output :${ans}</h2>`
   document.getElementById("score_player1").innerHTML =  myScore
   document.getElementById("score_player2").innerHTML =  oppoScore
 })
+socket.on('sOpponentScore', ans => {
+  
+  //console.log(myAns)
+  //myAns = myAns.toUpperCase()
+  //console.log(ans)
+  //console.log("soppo")
+  //console.log(document.getElementById('me').append(p1)) 
+ 
+})
 
 async function setShow() {
-  if(count===2){
+  let times=1;
   let sample
-  console.log("hi")
+  //console.log("game")
   socket.emit('startcount', sample)
-  }
-  else{
-    alert('Only one person is the lobby !')
+  var game= setInterval(function(){
+    if(times!=1){
+      let sample
+  //console.log("game")
+  socket.emit('startcount', sample)
+    }
+    else{
+      clearInterval(game);
+      console.log(myScore)
+      console.log(oppoScore)
+      //myScore=0
+      //oppoScore=0
+    }
+    times++;
+  },10000)
+}
+  async function ssetShow() {
+
+        let sample
+    console.log("hi")
+    socket.emit('sstartcount', sample)
+ 
+       
   }
 
-  /* show=1;
-   if(f==1){
-     init();
-     f=0;
-   }*/
-}
 // Load the image model and setup the webcam
 async function init() {
   const modelURL = URL + "model.json";
@@ -366,12 +453,12 @@ async function init() {
   maxPredictions = model.getTotalClasses();
   // await setShow()
   // Convenience function to setup a webcam
+  console.log("init")
   const flip = true; // whether to flip the webcam
   webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
   await webcam.setup(); // request access to the webcam
   await webcam.play();
   window.requestAnimationFrame(loop);
-
   // append elements to the DOM
 
 
@@ -380,6 +467,7 @@ async function init() {
 
 async function loop() {
   webcam.update(); // update the webcam frame
+  
   await predict();
   window.requestAnimationFrame(loop);
 }
@@ -387,14 +475,14 @@ async function loop() {
 // run the webcam image through the image model
 async function predict() {
   // predict can take in an image, video or canvas html element
-  if (show == 1) {
+  if (show === 1) {
+   
     const prediction = await model.predict(webcam.canvas);
     let ans;
     let max = 0
     for (let i = 0; i < maxPredictions; i++) {
-      const classPrediction =
-        prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-    console.log(prediction[i])
+    
+    //console.log(prediction[i])
       if (prediction[i].probability.toFixed(2) > max) {
         ans = prediction[i].className
       }
@@ -404,8 +492,22 @@ async function predict() {
     // console.log("hi")
     myAns = ans
     ans = ans.toUpperCase();
-    console.log(ans);
-    socket.emit('Result', ans, ROOM_ID)
+   // console.log(ans);
+    if(f==0){
+    socket.emit('sResult', ans, ROOM_ID)
+    f=1;
+    //console.log("trial")
+    }
+    else{
+      //console.log("nottrial")
+      console.log(ans)
+      
+      socket.emit('Result', ans, ROOM_ID)
+      
+      console.log(ans)
+        myAns=ans 
+    }
+   
   }
 }
-
+  
