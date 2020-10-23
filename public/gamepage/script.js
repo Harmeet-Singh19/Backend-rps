@@ -101,10 +101,10 @@ navigator.mediaDevices.getUserMedia({
   socket.on("createMessage", (message,userId) => {
     console.log(message)
     if(userId===socket.id){
-    $("ul").append(`<li class="message"><b>Me:</b>${message}</li><br>`);
+      $("ul").append(`<li style="color:#25D366;" class="message"><b>Me:</b>${message}</li><br>`);
     }
     else{
-      $("ul").append(`<li class="message"><b>Opponent:</b>${message}</li><br>`);
+      $("ul").append(`<li style="color:#34B7F1;" class="message"><b>Opponent:</b>${message}</li><br>`);
     }
     scrollToBottom()
   })
