@@ -34,7 +34,7 @@ tsParticles.load("tsparticlesr", {
         color: "random",
         consent: false,
         distance: 30,
-        enable: true,
+        enable: false,
         opacity: 0.3,
         width: 0.5
       },
