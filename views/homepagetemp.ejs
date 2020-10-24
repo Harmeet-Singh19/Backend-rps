@@ -3,34 +3,34 @@
 <html lang="en">
 
 <!-- HEAD  -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roctoid</title>
     <!-- <link rel="stylesheet" href="/hpt/style.css"> -->
-    <link rel = "stylesheet" href = "/homepage/index.css">
-   
+    <link rel="stylesheet" href="/homepage/base.min.css">
+    <link rel="stylesheet" href="/homepage/index.css">
+
     <script src="https://cdn.jsdelivr.net/npm/pathseg@1.2.0/pathseg.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@1.18.3/dist/tsparticles.min.js"></script>
 </head>
 
 <!-- BODY -->
+
 <body>
 
-  <!-- PARTICLE JS  -->
-    <div class="bg">
-        <div id="tsparticlesr"></div>
-        <div id="tsparticlesp"></div>
-        <div id="tsparticless"></div>
-    </div>
+    <section id="main">
+        <!-- PARTICLE JS  -->
 
-    <!-- NAVBAR -->
-    <nav class='navbar'>
-      <div class='navbar-container'>
 
-        <!-- LOGO -->
-        <div class='navbar-logo'>
-          <span class="l " >Roctoid</span >
+        <!-- NAVBAR -->
+        <nav class='navbar'>
+            <div class='navbar-container'>
+
+                <!-- LOGO -->
+                <div class='navbar-logo'>
+                    <span class="l ">Roctoid</span >
             <img class="logo l" src="" />
         </div>
 
@@ -41,46 +41,64 @@
           <ul class='nav-menu'>
             <li class='nav-item'>
               <div  class='nav-divs' >
-              <span class="nav-sp">Home</span>  
-              </div>
-            </li>
-            <li class='nav-item'>
-              <div class='nav-divs'>
-                Rules
-              </div>
-            </li>
-            <li class='nav-item'>
-              <div class='nav-divs'>
-               About Us
-              </div>
-            </li>
-          </ul>
+              <span class="nav-sp">Home</span>
+                </div>
+                </li>
+                <li class='nav-item'>
+                    <div class='nav-divs'>
+                        Rules
+                    </div>
+                </li>
+                <li class='nav-item'>
+                    <div class='nav-divs'>
+                        About Us
+                    </div>
+                </li>
+                </ul>
+            </div>
+        </nav>
+
+
+    </section>
+    <!-- content  -->
+    <section id="content">
+
+        <div class="bg">
+            <div id="tsparticlesr"></div>
+            <div id="tsparticlesp"></div>
+            <div id="tsparticless"></div>
         </div>
-    </nav>
+        <div class="row">
 
-      <!-- MAIN CONTENT -->
-    <div class="content">
-      <div class="left">
-            <h1  spellcheck="false">Rock</h1>
-            <h1  spellcheck="false" style="animation-delay:200ms;">Paper</h1>
-            <h1  spellcheck="false" style="animation-delay:400ms;">Scissor</h1>
-      </div>
-      <div class="right">
-              <h2> Welcome to 1990</h2>
-              <div class="entry">
-                <a href="/game" ><button class="glow-on-hover" type="button">CREATE A ROOM</button></a>
-                <br>
+            <div class="col-nine neon-lights">
 
-                <a href="/game"><button class="glow-on-hover" type="button">JOIN A ROOM</button></a>
-                
+                <h1 spellcheck="false">Rock</h1>
+                <h1 spellcheck="false" style="animation-delay:200ms;">Paper</h1>
+                <h1 spellcheck="false" style="animation-delay:400ms;">Scissor</h1>
+
             </div>
-            <div class="about-team">
-                
-            </div>
-      </div>
-    </div>
-     
+            <div class="col-three main-buttons">
 
-  </body>
+                <h2 class="main-heading"> Drift to the past </h2>
+                <div class="entry">
+                    <a href="/game"><button class="glow-on-hover" type="button">CREATE A ROOM</button></a>
+                    <br>
+
+                    <a href="/game"><button class="glow-on-hover" type="button">JOIN A ROOM</button></a>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="rules">
+        <div></div>
+    </section>
+
+
+</body>
 <script src="/hpt/particle.js"></script>
+
 </html>

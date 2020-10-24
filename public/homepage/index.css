@@ -1,10 +1,9 @@
 /*     ------------------ IMPORTS -----------------    */
-@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
 
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
 :root {
     /* Base font size */
     font-size: 10px;
-
     /* Set neon color */
     --neon-text-color: #f40;
     --neon-border-color: #08f;
@@ -19,6 +18,7 @@
     font-family: Ninety;
     src: url('/homepage/fonts/budmo\ jiggler.ttf');
 }
+
 
 /*     ------------------ REUSABLE STYLES -----------------    */
 
@@ -40,9 +40,6 @@ html {
     overflow: hidden;
     z-index: -1;
 }
-
-
-
 
 h1 {
     position: relative;
@@ -85,12 +82,14 @@ a:visited {
     text-decoration: none;
 }
 
+
 /*     ------------------ NAVBAR STYLE -----------------    */
 
 .navbar {
     background: #190113;
     height: 80px;
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
@@ -118,7 +117,6 @@ a:visited {
     display: flex;
     align-items: center;
     height: 100%;
-
 }
 
 .logo {
@@ -149,14 +147,12 @@ a:visited {
     align-items: center;
     text-decoration: none;
     padding: 0.5rem 1rem;
-
     height: 100%;
 }
 
 .nav-links:hover {
     border-bottom: 5px solid white;
     transition: all 0.2s ease-out;
-
 }
 
 .l {
@@ -179,7 +175,6 @@ a:visited {
     .NavbarItems {
         position: relative;
     }
-
     .nav-menu {
         display: flex;
         flex-direction: column;
@@ -191,7 +186,6 @@ a:visited {
         opacity: 1;
         transition: all 0.5s ease;
     }
-
     .nav-menu.active {
         background: black;
         left: 0;
@@ -199,27 +193,22 @@ a:visited {
         transition: all 0.5s ease;
         z-index: 1;
     }
-
     .nav-links {
         text-align: center;
         padding: 2rem;
         width: 100%;
         display: table;
     }
-
     .nav-links:hover {
         background-color: white;
         color: black;
         border-radius: 0;
     }
-
     .navbar-logo {
         position: absolute;
         top: 0;
         left: 0;
-
     }
-
     .menu-icon {
         display: block;
         position: absolute;
@@ -229,12 +218,10 @@ a:visited {
         font-size: 1.8rem;
         cursor: pointer;
     }
-
     .fa-times {
         color: white;
         font-size: 2rem;
     }
-
     .nav-links-mobile {
         display: block;
         text-align: center;
@@ -249,7 +236,6 @@ a:visited {
         border: 1px solid white;
         transition: all 0.3s ease-out;
     }
-
     .nav-links-mobile:hover {
         background: white;
         color: black;
@@ -261,28 +247,24 @@ a:visited {
     0% {
         transform: none;
     }
-
     25% {
         transform: translateY(-1.5px);
     }
-
     50% {
         transform: translateY(0px);
     }
-
     75% {
         transform: translateY(1.5px);
     }
-
     100% {
         transform: translateY(0px);
     }
 }
 
+
 /*     ------------------ NEON FLICKER -----------------    */
 
 @keyframes flicker {
-
     0%,
     19%,
     21%,
@@ -291,25 +273,9 @@ a:visited {
     54%,
     56%,
     100% {
-
-        text-shadow:
-            -0.2rem -0.2rem 1rem #fff,
-            0.2rem 0.2rem 1rem #fff,
-            0 0 2rem var(--neon-text-color),
-            0 0 4rem var(--neon-text-color),
-            0 0 6rem var(--neon-text-color),
-            0 0 8rem var(--neon-text-color),
-            0 0 10rem var(--neon-text-color);
-
-        box-shadow:
-            0 0 .5rem #fff,
-            inset 0 0 .5rem #fff,
-            0 0 2rem var(--neon-border-color),
-            inset 0 0 2rem var(--neon-border-color),
-            0 0 4rem var(--neon-border-color),
-            inset 0 0 4rem var(--neon-border-color);
+        text-shadow: -0.2rem -0.2rem 1rem #fff, 0.2rem 0.2rem 1rem #fff, 0 0 2rem var(--neon-text-color), 0 0 4rem var(--neon-text-color), 0 0 6rem var(--neon-text-color), 0 0 8rem var(--neon-text-color), 0 0 10rem var(--neon-text-color);
+        box-shadow: 0 0 .5rem #fff, inset 0 0 .5rem #fff, 0 0 2rem var(--neon-border-color), inset 0 0 2rem var(--neon-border-color), 0 0 4rem var(--neon-border-color), inset 0 0 4rem var(--neon-border-color);
     }
-
     20%,
     24%,
     55% {
@@ -318,24 +284,35 @@ a:visited {
     }
 }
 
+
 /*     ------------------ CONTENT SECTION -----------------    */
 
-.content {
+#content {
     display: flex;
     background-image: -webkit-linear-gradient(rgba(72, 0, 45, 0.7), rgba(21, 9, 50, 0.7));
     z-index: -200;
-
 }
 
+
 /* MAIN TEXT ON CONTENT */
-.right {
-    margin-left: 500px;
+
+.main-heading {
     font-family: Ninety;
     color: wheat;
     font-size: 6rem;
 }
 
+.neon-lights {
+    margin-top: 5rem;
+}
+
+.main-buttons {
+    margin-top: 15rem;
+}
+
+
 /* BUTTON ON CONTENT */
+
 .glow-on-hover {
     width: 250px;
     height: 80px;
@@ -399,17 +376,17 @@ a:visited {
     0% {
         background-position: 0 0;
     }
-
     50% {
         background-position: 400% 0;
     }
-
     100% {
         background-position: 0 0;
     }
 }
 
+
 /* PARTICLE JS CSS ON CONTENT */
+
 #tsparticlesr {
     position: relative;
     left: -43%;
