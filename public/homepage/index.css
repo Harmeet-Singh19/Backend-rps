@@ -1,4 +1,3 @@
-
 /*     ------------------ IMPORTS -----------------    */
 
 @import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
@@ -98,12 +97,14 @@ a:link {
 
 a:visited {
     text-decoration: none;
-    
 }
+
 
 /* --------------------------LOADER ---------------------- */
 
+
 /*  background: url('/homepage/img/load.gif') no-repeat center center;*/
+
 #loading {
     width: 100%;
     height: 100%;
@@ -121,64 +122,63 @@ a:visited {
     display: flex;
     flex-direction: column;
     justify-content: start;
-  }
-  
-  #loading-image {
-    
+}
+
+#loading-image {
     margin-top: 20%;
     margin-bottom: 20px;
     z-index: 100;
     height: 200px;
     width: 200px;
-  }
-  #loading span{
-      color: white;
-      text-align: center;
-      font-size: 5rem;
-      font-family: Ninety;
-      font-weight: 700;
-      animation:colorchange 5s infinite
-  }
+}
 
-  @keyframes colorchange{
-    0%{
-        color:white;
+#loading span {
+    color: white;
+    text-align: center;
+    font-size: 5rem;
+    font-family: Ninety;
+    font-weight: 700;
+    animation: colorchange 5s infinite
+}
+
+@keyframes colorchange {
+    0% {
+        color: white;
     }
-    
-    10%{
+    10% {
         color: orange;
     }
-    20%{
+    20% {
         color: blue;
     }
-    30%{
+    30% {
         color: yellow;
     }
-    40%{
+    40% {
         color: pink;
     }
-    50%{
+    50% {
         color: purple;
     }
-    60%{
+    60% {
         color: wheat;
     }
-    70%{
+    70% {
         color: red;
     }
-    80%{
+    80% {
         color: royalblue;
     }
-    90%{
+    90% {
         color: gray;
     }
-    100%{
+    100% {
         color: darkgreen;
     }
 }
 
-/*     ------------------ NAVBAR STYLE -----------------    */
 
+/*     ------------------ NAVBAR STYLE -----------------    */
 
 .navbar {
     background: #190113;
@@ -405,6 +405,10 @@ a:visited {
     margin-top: 15rem;
 }
 
+.url-button {
+    color: black;
+}
+
 
 /* BUTTON ON CONTENT */
 
@@ -518,7 +522,7 @@ a:visited {
 }
 
 .rules_dec {
-    background-image: -webkit-linear-gradient(#961394, #480a5a);
+    background-image: url(/homepage/img/rules-bcg.png);
 }
 
 .rule_list {
