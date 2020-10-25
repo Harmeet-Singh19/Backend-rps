@@ -1,11 +1,89 @@
 *{
     box-sizing: border-box;
 }
+@font-face {
+    font-family: Ninety;
+    src: url('/homepage/fonts/budmo\ jiggler.ttf');
+}
 
 html,body{
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+}
+
+#loading {
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 1;
+    background-color: black;
+    z-index: 1000;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+#loading-image {
+    margin-top: 20%;
+    margin-bottom: 20px;
+    z-index: 100;
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+}
+
+#loading span {
+    color: white;
+    text-align: center;
+    font-size: 5rem;
+    font-family: Ninety;
+    font-weight: 700;
+    animation: colorchange 5s infinite
+}
+
+@keyframes colorchange {
+    0% {
+        color: white;
+    }
+    10% {
+        color: orange;
+    }
+    20% {
+        color: blue;
+    }
+    30% {
+        color: yellow;
+    }
+    40% {
+        color: pink;
+    }
+    50% {
+        color: purple;
+    }
+    60% {
+        color: wheat;
+    }
+    70% {
+        color: red;
+    }
+    80% {
+        color: royalblue;
+    }
+    90% {
+        color: gray;
+    }
+    100% {
+        color: darkgreen;
+    }
 }
 
 
@@ -108,7 +186,6 @@ html,body{
 
 #chat_head{
     font-size: 20px;
-    font-family: ;
 }
 
 .main__controls__button:hover {

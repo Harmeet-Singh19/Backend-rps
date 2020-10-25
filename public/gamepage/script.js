@@ -53,8 +53,25 @@ myMessage2.id="oppo"
 myVideo.muted = true;
 const peers = {}
 
-
 const callList = [];
+
+      $('html, body').css({
+          'overflow': 'hidden',
+          'height': '100%'
+      })
+      $(window).load(function() {
+       //console.log("endl")
+          setInterval(function() {
+              $("#loading").fadeOut("slow")
+              $('html, body').css({
+                  'overflow': 'inherit',
+                  'overflow-x':'hidden',
+                  'height': '100%'
+              })
+          }, 4 * 1000);
+          
+      });
+
 
 navigator.mediaDevices.getUserMedia({
   video: true,
@@ -84,9 +101,13 @@ navigator.mediaDevices.getUserMedia({
     myId = socket.id
     //   console.log(peers)
     //console.log(peers.length)
+    document.getElementById('lspan').innerText='Connecting to New User'
+   $('#loading').fadeIn('slow')
+   
     connectToNewUser(userId, stream)
     addOutput(myMessage)
     addOutput(myMessage2)
+    
   })
   // input value
   let text = $("#chat_message");
@@ -136,14 +157,19 @@ function connectToNewUser(userId, stream) {
   call.on('stream', userVideoStream => {
     if(!callList[call.peer]){
     //console.log(userVideoStream)
+    
     addVideoStream(video, userVideoStream)
     callList[call.peer] = call;
     ssetShow()
+   
+   
+     
     }
   })
   call.on('close', () => {
     video.remove()
     count=0
+    
   })
 
   peers[userId] = call

@@ -103,8 +103,6 @@ a:visited {
 /* --------------------------LOADER ---------------------- */
 
 
-/*  background: url('/homepage/img/load.gif') no-repeat center center;*/
-
 #loading {
     width: 100%;
     height: 100%;
@@ -469,6 +467,41 @@ a:visited {
     top: 0;
     border-radius: 10px;
     font-family: Oldage;
+}
+.hidden-input{
+    width: 250px;
+    height: 100px;
+    border: none;
+    outline: none;
+    z-index: 0;
+    border-radius: 10px;
+    display: block;
+    font-family: Oldage;
+    margin: auto;
+    margin-top: 30px;
+    display: none;
+}
+#inputURL{
+width: 100%;
+height: 25px;
+margin-bottom: 10px;
+color: black;
+}
+.glow-on-hover2{
+    width: 50%px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #8c0569;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    display: block;
+    font-family: Oldage;
+    margin: auto;
+    float: right;
 }
 
 @keyframes glowing {

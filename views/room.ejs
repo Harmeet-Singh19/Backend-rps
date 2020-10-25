@@ -17,12 +17,13 @@
    <script src="/socket.io/socket.io.js" defer></script>
    <link rel="stylesheet" href="/gamepage/style.css">
    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
-   <script src="/gamepage/script.js" defer></script>
+   
    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
    <script src="https://cdn.jsdelivr.net/npm/pathseg@1.2.0/pathseg.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@1.18.3/dist/tsparticles.min.js"></script>
- 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/gamepage/script.js" defer></script>
 </head>
 
 <body>
@@ -36,7 +37,10 @@
 
    </div>
  
-  
+   <div id="loading">
+   <img id="loading-image" src="/homepage/img/load.gif" alt="Loading..." />
+   <span id="lspan">Loading</span>
+</div>
    <div class="main">
       <div class="modal">
          <div class="modal-content">
@@ -160,6 +164,8 @@
          src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 
    </div>
+   
 </body>
+
 
 </html>
