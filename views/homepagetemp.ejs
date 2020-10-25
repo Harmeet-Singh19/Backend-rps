@@ -5,13 +5,23 @@
 <!-- HEAD  -->
 
 <head>
+    <meta name="description" content="Roctoid is the online multiplayer Rock Paper Scissors. Roctoid Uses AI model to predict the choice of user and via webRTC allows us to play our favorite game!">
+    <meta name="author" content="Aditya Karn, Harmeet Singh, Vinay Dahiya">
+    <meta name="keywords" content="Roctoid,Rocktoid Rock Paper Scissors, Online Rock Paper Scissors,  NSUT, Online Multiplayer Games, NSIT, Netaji Subhas University of Technology, Netaji Subhas Institute of Technology">
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roctoid</title>
     <!-- <link rel="stylesheet" href="/hpt/style.css"> -->
     <link rel="stylesheet" href="/homepage/base.min.css">
     <link rel="stylesheet" href="/homepage/index.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="/homepage/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/homepage/img/favicon.ico" type="image/x-icon">
+
+
     <script src="https://cdn.jsdelivr.net/npm/pathseg@1.2.0/pathseg.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="/homepage/index.js"></script>
@@ -35,7 +45,8 @@
                 <!-- LOGO -->
                 <div class='navbar-logo'>
                     <span class="l ">Roctoid</span >
-        </div>
+                        <img src="/homepage/img/android-chrome-192x192.png" width="10%">
+                </div>
 
         <!-- LINKS -->
           <div class='menu-icon' >
@@ -82,19 +93,19 @@
                     <a href="/game" target="blank"><button class="glow-on-hover" type="button">CREATE A ROOM</button></a>
                     <br>
                     <button class="glow-on-hover " id="joinbtn" type="button" onclick="show()">JOIN A ROOM</button>
-                    <div class="hidden-input"><input type="text"  id="inputURL"><button class="glow-on-hover2" type="button" onclick="Submit()">Submit</button></div>
+                    <div class="hidden-input"><input type="text" id="inputURL"><button class="glow-on-hover2" type="button" onclick="Submit()">Submit</button></div>
                 </div>
                 <script>
-                    function show(){
+                    function show() {
                         $('.hidden-input').toggle('slide')
                     }
-                    function Submit(){
-                        let url=$('#inputURL').val()
+
+                    function Submit() {
+                        let url = $('#inputURL').val()
                         console.log(url);
-                        if(url!==""){
+                        if (url !== "") {
                             window.location.replace(`${url}`)
-                        }
-                        else{
+                        } else {
                             alert('Please enter a valid url')
                         }
                     }
