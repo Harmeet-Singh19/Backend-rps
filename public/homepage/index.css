@@ -456,3 +456,30 @@ margin-bottom: 30px;
     font-weight: 600;
 }
 
+.rule_list{
+    padding: 40px 10px;
+    font-size: 20px;
+}
+.gen-rule{
+    font-size: 20px;
+    padding: 20px 10px;
+
+}
+.img_list{
+    padding: 5px 1px;
+
+}
+.rule_img{
+    width: 150px;
+    height: 150px;
+}
+
+.rule-start{
+    color: #f40;
+    text-decoration: underline;
+}
+
+video{
+    position: relative;
+    top: 200px;
+}
