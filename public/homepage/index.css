@@ -19,6 +19,16 @@
     src: url('/homepage/fonts/budmo\ jiggler.ttf');
 }
 
+@font-face {
+    font-family: Barlow;
+    src: url('/homepage/fonts/BarlowCondensed-Regular.ttf');
+}
+
+@font-face {
+    font-family: Share-Tech;
+    src: url('/homepage/fonts/ShareTechMono-Regular.ttf');
+}
+
 
 /*     ------------------ REUSABLE STYLES -----------------    */
 
@@ -30,7 +40,7 @@ body,
 html {
     margin: 0;
     padding: 0;
-    
+    background-color: #190113;
 }
 
 .bg {
@@ -74,9 +84,9 @@ h1::selection {
 h1:focus {
     outline: none;
 }
-a{
+
+a {
     text-decoration: none;
-    
 }
 
 a:link {
@@ -413,15 +423,64 @@ a:visited {
     z-index: -10;
 }
 
-/* About Us */
 
-#about-us{
-background-color: black;
-margin-bottom: 30px;
+/* RULES */
+
+#rules {
+    display: flex;
+    background-image: -webkit-linear-gradient(rgba(39, 179, 132, 0.7), rgba(12, 47, 36, 0.7));
+}
+
+.rules-heading {
+    font-family: Ninety;
+    text-align: center;
+    font-size: 10em;
+    background-image: -webkit-linear-gradient(rgba(196, 35, 134, 0.7), rgba(21, 9, 50, 0.7));
+}
+
+.rules_dec {
+    background-image: -webkit-linear-gradient(rgba(34, 164, 121, 0.7), rgba(14, 61, 45, 0.7));
+}
+
+.rule_list {
+    font-size: x-large;
+    margin-top: 4em;
+    margin-bottom: 2em;
+    font-family: Barlow;
+    font-style: normal;
+}
+
+.gen-rule {
+    font-size: x-large;
+    font-family: Barlow;
+    margin-bottom: 2em;
+    font-style: normal;
+}
+
+.img_list {
+    margin-top: 4em;
+}
+
+.demo-vid {
+    margin-top: 20em;
 }
 
 
-.info-wrapper{
+/* About Us */
+
+#about-us {
+    background-image: -webkit-linear-gradient(rgba(72, 0, 45, 0.7), rgba(21, 9, 50, 0.7));
+    margin-bottom: 30px;
+}
+
+.about-us-header {
+    font-family: Ninety;
+    text-align: center;
+    font-size: 10em;
+    background-image: -webkit-linear-gradient(rgba(196, 35, 134, 0.7), rgba(21, 9, 50, 0.7));
+}
+
+.info-wrapper {
     width: 300px;
     height: 330px;
     margin-top: 55px;
@@ -429,18 +488,26 @@ margin-bottom: 30px;
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    background-color: wheat;
-    border-radius: 12px;
+    background-color: #57044a;
+    border-radius: 41px;
+    background: #270221;
+    box-shadow: 26px 26px 31px #10010d, -26px -26px 31px #3e0335;
+    font-family: Share-Tech;
+    color: whitesmoke;
 }
 
- img{
-     height: 150px;
-     width: 150px;
-  border-radius: 100%;
+.about-text {
+    color: white;
+    font-style: normal;
 }
 
+img {
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+}
 
-.info-about{
+.info-about {
     width: 70%;
     text-align: center;
     margin-bottom: 30px;
@@ -449,37 +516,9 @@ margin-bottom: 30px;
     color: black;
     font-size: 20px;
     height: 200px;
-    
 }
-.info-about span{
+
+.info-about span {
     margin-top: 20px;
     font-weight: 600;
-}
-
-.rule_list{
-    padding: 40px 10px;
-    font-size: 20px;
-}
-.gen-rule{
-    font-size: 20px;
-    padding: 20px 10px;
-
-}
-.img_list{
-    padding: 5px 1px;
-
-}
-.rule_img{
-    width: 150px;
-    height: 150px;
-}
-
-.rule-start{
-    color: #f40;
-    text-decoration: underline;
-}
-
-video{
-    position: relative;
-    top: 200px;
 }
