@@ -174,7 +174,7 @@ a:visited {
     animation: updown 3s ease-in-out infinite;
 }
 
-.fa-bars {
+.bars {
     color: white;
 }
 
@@ -477,6 +477,7 @@ a:visited {
     font-family: Ninety;
     text-align: center;
     font-size: 10em;
+    width: 100%;
     background-image: -webkit-linear-gradient(rgba(196, 35, 134, 0.7), rgba(21, 9, 50, 0.7));
 }
 
