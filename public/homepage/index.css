@@ -428,7 +428,6 @@ a:visited {
 
 #rules {
     display: flex;
-    background-image: -webkit-linear-gradient(rgba(39, 179, 132, 0.7), rgba(12, 47, 36, 0.7));
 }
 
 .rules-heading {
@@ -439,7 +438,7 @@ a:visited {
 }
 
 .rules_dec {
-    background-image: -webkit-linear-gradient(rgba(34, 164, 121, 0.7), rgba(14, 61, 45, 0.7));
+    background-image: -webkit-linear-gradient(#961394, #480a5a);
 }
 
 .rule_list {
@@ -455,6 +454,7 @@ a:visited {
     font-family: Barlow;
     margin-bottom: 2em;
     font-style: normal;
+    text-align: center;
 }
 
 .img_list {
@@ -462,7 +462,7 @@ a:visited {
 }
 
 .demo-vid {
-    margin-top: 20em;
+    margin-top: 10em;
 }
 
 
@@ -474,6 +474,7 @@ a:visited {
 }
 
 .about-us-header {
+    width: 100%;
     font-family: Ninety;
     text-align: center;
     font-size: 10em;
