@@ -3,7 +3,7 @@ const videoGrid = document.getElementById('video-grid')
 const outputGrid = document.getElementById('output-grid')
 // const copyBtn = document.getElementById('copy-button')
 // const friendUrl = document.getElementById('friend-url')
-const URL = "../new/";
+const URL = "../FinalModel/";
 let model, webcam, labelContainer, maxPredictions;
 let show = 0;
 let f = 0;
@@ -16,18 +16,13 @@ let oppoScore = 0;
 let myAns;
 let ms
 var count = 0;
-let p1=document.getElementById('rock').cloneNode(true);
-p1.id="rock2"
-let p2=document.getElementById('paper').cloneNode(true);
-p2.id="paper2"
-let p3=document.getElementById('scissor').cloneNode(true);
-p3.id="scissor2"
+
 var modal = document.querySelector(".modal");
 var modalcontent=document.querySelector('.modal-content')
 
 
 const toggleModal=()=> {
-  console.log("t")
+  //console.log("t")
     modal.classList.toggle("show-modal");
 }
 
@@ -161,9 +156,7 @@ function connectToNewUser(userId, stream) {
     addVideoStream(video, userVideoStream)
     callList[call.peer] = call;
     ssetShow()
-   
-   
-     
+    
     }
   })
   call.on('close', () => {
@@ -229,7 +222,7 @@ const muteUnmute = () => {
 }
 
 const playStop = () => {
-  console.log('object')
+  //console.log('object')
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
   if (enabled) {
     myVideoStream.getVideoTracks()[0].enabled = false;
@@ -303,7 +296,7 @@ const copyText=()=>{
   el.select();
   document.execCommand('copy');
   document.body.removeChild(el);
-  console.log("copied")
+ // console.log("copied")
 }
 socket.on('otherstart', userId => {
  // console.log("hello")
@@ -311,7 +304,7 @@ socket.on('otherstart', userId => {
   document.getElementsByClassName("main")[0].blur()
   document.getElementById("countdown").style.zIndex=1
   document.getElementById("countdown").style.opacity=0.7
-  var audio = new Audio("/gamepage/img/camera-shutter-click-01.mp3");
+  var audio = new Audio("/gamepage/assets/camera-shutter-click-01.mp3");
   
   var downloadTimer = setInterval(function () {
     if (timeleft <= 0) {
@@ -360,16 +353,13 @@ socket.on('sotherstart', userId => {
  
  })
  
-socket.on('OpponentScore', async(ans) => {
-  await socket.on('myB',ans=>{
-    console.log("me")
-    myAns=ans
-  })
-  //console.log(myAns)
+socket.on('OpponentScore', (ans) => {
+ 
+ // console.log(myAns)
 
   myAns = myAns.toUpperCase()
-  console.log(ans+"o")
-  console.log(myAns+"me")
+ // console.log(ans+"o")
+ // console.log(myAns+"me")
   //console.log(document.getElementById('me').append(p1)) 
  
   if (myAns === ans) {
@@ -459,7 +449,7 @@ async function setShow() {
   async function ssetShow() {
 
         let sample
-    console.log("hi")
+    //console.log("hi")
     socket.emit('sstartcount', sample)
  
        
@@ -526,11 +516,11 @@ async function predict() {
     }
     else{
       //console.log("nottrial")
-      console.log(ans)
+      //console.log(ans)
       
       socket.emit('Result', ans, ROOM_ID)
       
-      console.log(ans)
+     // console.log(ans)
         myAns=ans 
     }
    

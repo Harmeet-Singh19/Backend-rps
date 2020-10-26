@@ -12,7 +12,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-    res.render('homepagetemp')
+    res.render('homepage')
 })
 app.get('/game', (req, res) => {
     res.redirect(`/game/${uuidV4()}`)
@@ -53,10 +53,10 @@ io.on('connection', socket => {
             io.to(roomId).emit('otherstart', userId)
         })
 
-        socket.on('Result', async(rps, roomId) => {
+        socket.on('Result', (rps, roomId) => {
             // console.log(rps)
-            await socket.emit('myB', rps)
-            await socket.to(roomId).emit('OpponentScore', rps)
+            
+             socket.to(roomId).emit('OpponentScore', rps)
 
         })
         socket.on('sstartcount', (sample) => {
