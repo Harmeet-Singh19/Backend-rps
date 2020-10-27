@@ -46,6 +46,11 @@ html {
     overflow-x: hidden;
 }
 
+section{
+    overflow: hidden;
+}
+
+
 .bg {
     position: absolute;
     height: 100%;
@@ -438,6 +443,7 @@ color: black;
     font-family: Oldage;
     margin: auto;
     float: right;
+    margin-right: 25%;
 }
 
 @keyframes glowing {
@@ -514,8 +520,8 @@ color: black;
 }
 
 .info-wrapper {
-    width: 300px;
-    height: 330px;
+    width: 95%;
+    height: 350px;
     margin-top: 55px;
     display: flex;
     flex-direction: column;
@@ -556,6 +562,13 @@ img {
     font-weight: 600;
 }
 
+.list_disp{
+    display: flex;
+    align-items: center;
+    
+
+}
+
 
 /*-------------------Media Query ---------------*/
 
@@ -582,6 +595,11 @@ img {
     font-style: italic;
     color: #fff;
     padding: 3.5rem;
+    }
+
+    video{
+        height: 380px;
+        width: 400px;
     }
 }
 @media(max-width:900px){
@@ -624,6 +642,28 @@ img {
     }
 }
 
+@media(max-width:750px){
+    #row_1{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .col-eight{
+        width: 100%;
+    }
+
+    .col-four{
+        width: 100%;
+    }
+
+    video{
+        position: relative;
+
+        top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
 @media(max-width:630px){
     .neon-lights{
         width: 80%;
@@ -663,4 +703,5 @@ img {
         width: 80%;
         margin-left: 3%;
     }
+    
 }
