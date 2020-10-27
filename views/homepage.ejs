@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roctoid</title>
-    
+
     <link rel="stylesheet" href="/homepage/base.min.css">
     <link rel="stylesheet" href="/homepage/index.css">
 
@@ -50,17 +50,17 @@
           <ul class='nav-menu col-nine'>
             <li class='nav-item'>
               <div  class='nav-divs' >
-              <span class="nav-sp"><a style="color: white;" href="#main">Home</a></span>
+              <span class="nav-sp"><a style="color: white;" href="#main" class="smoothscroll">Home</a></span>
                 </div>
                 </li>
                 <li class='nav-item'>
                     <div class='nav-divs'>
-                        <a style="color: white;" href="#rules_sec">Rules</a>
+                        <a style="color: white;" href="#rules_sec" class="smoothscroll">Rules</a>
                     </div>
                 </li>
                 <li class='nav-item'>
                     <div class='nav-divs'>
-                        <a style="color: white;" href="#about-us">About Us</a> 
+                        <a style="color: white;" href="#about-us" class="smoothscroll">About Us</a>
                     </div>
                 </li>
                 </ul>
@@ -72,9 +72,15 @@
         <div class="row con">
 
             <div class="col-nine neon-lights">
-                <div class="pic-board"> <img src="/homepage/img/rock.jpg" alt="" class="pic-item"><h1 spellcheck="false">Rock</h1></div>
-                <div class="pic-board"> <img src="/homepage/img/paper.jpg" alt="" class="pic-item"><h1 spellcheck="false" style="animation-delay:200ms;">Paper</h1></div>
-                <div class="pic-board"> <img src="/homepage/img/scissor.jpg" alt="" class="pic-item"><h1 spellcheck="false" style="animation-delay:400ms;">Scissor</h1></div>
+                <div class="pic-board"> <img src="/homepage/img/rock.jpg" alt="" class="pic-item">
+                    <h1 spellcheck="false">Rock</h1>
+                </div>
+                <div class="pic-board"> <img src="/homepage/img/paper.jpg" alt="" class="pic-item">
+                    <h1 spellcheck="false" style="animation-delay:200ms;">Paper</h1>
+                </div>
+                <div class="pic-board"> <img src="/homepage/img/scissor.jpg" alt="" class="pic-item">
+                    <h1 spellcheck="false" style="animation-delay:400ms;">Scissor</h1>
+                </div>
             </div>
             <div class="col-three main-buttons">
 
@@ -116,30 +122,27 @@
             </div>
             <div id="row_1" class="row">
                 <div class="col-eight rules-back">
-                    
-                        
-                            <div class="list_disp">
-                                <p class="rule_list">For rock gesture:Clench your fist and hold it in front of the camera with the fist occupying most of the frame
-                                and make sure it covers your face for better accuracy</p>
-                                <img src="homepage/img/rock_gesture.jpg" class="rule_img" alt="rock"></li>
-                            </div>
-                            <div class="list_disp">
-                                <p class="rule_list">For paper gesture:Hold your outstrehed hand in front of the camera with your palm facing towards tha camera and
-                                make sure your fingers aren't seperated much for better accuracy</p>
-                                <img src="homepage/img/paper_gesture.jpg" class="rule_img" alt="rock"></li>
-                            </div>
 
-                            <div class="list_disp">
-                                <p class="rule_list">For scissors gesture:Clench your fist and extend your middle and index finger to form a V shape and hold it in
-                                front of the camera making sure that your gesture covers most of your face. Also,
-                                avoid keeping the index and middle finger very close to each other, in order to achieve better accuracy</p>
-                                <img src="homepage/img/scissor_gesture.jpg" class="rule_img" alt="rock"></li>
-                            </div>
-                   
+
+                    <div class="list_disp">
+                        <p class="rule_list">For rock gesture:Clench your fist and hold it in front of the camera with the fist occupying most of the frame and make sure it covers your face for better accuracy</p>
+                        <img src="homepage/img/rock_gesture.jpg" class="rule_img" alt="rock"></li>
+                    </div>
+                    <div class="list_disp">
+                        <p class="rule_list">For paper gesture:Hold your outstrehed hand in front of the camera with your palm facing towards tha camera and make sure your fingers aren't seperated much for better accuracy</p>
+                        <img src="homepage/img/paper_gesture.jpg" class="rule_img" alt="rock"></li>
+                    </div>
+
+                    <div class="list_disp">
+                        <p class="rule_list">For scissors gesture:Clench your fist and extend your middle and index finger to form a V shape and hold it in front of the camera making sure that your gesture covers most of your face. Also, avoid keeping the index and middle
+                            finger very close to each other, in order to achieve better accuracy</p>
+                        <img src="homepage/img/scissor_gesture.jpg" class="rule_img" alt="rock"></li>
+                    </div>
+
                 </div>
                 <div class="col-four">
 
-                    <video class="demo-vid" src="homepage/video/sample.mp4"  controls>
+                    <video class="demo-vid" src="homepage/video/sample.mp4" controls>
                     </video>
                     <ul>
                         <li class="gen-rule">This is a best of 10 game</li>
@@ -155,7 +158,7 @@
     <section id="about-us">
 
         <div class="about-us-header">
-         ABOUT THE TEAM
+            ABOUT THE TEAM
         </div>
 
         <div class="row cards">
@@ -230,6 +233,64 @@
 
 
         });
+    </script>
+
+    <script>
+        (function($) {
+
+            "use strict";
+
+            var cfg = {
+                    defAnimation: "fadeInUp", // default css animation		
+                    scrollDuration: 800, // smoothscroll duration
+                },
+
+                $WIN = $(window);
+
+
+
+            /* Smooth Scrolling
+             * ------------------------------------------------------ */
+            var ssSmoothScroll = function() {
+
+                $('.smoothscroll').on('click', function(e) {
+                    var target = this.hash,
+                        $target = $(target);
+
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // check if menu is open
+                    if ($('body').hasClass('menu-is-open')) {
+                        $('#header-menu-trigger').trigger('click');
+                    }
+
+                    $('html, body').stop().animate({
+                        'scrollTop': $target.offset().top
+                    }, cfg.scrollDuration, 'swing').promise().done(function() {
+
+                        // check if menu is open
+                        if ($('body').hasClass('menu-is-open')) {
+                            $('#header-menu-trigger').trigger('click');
+                        }
+
+                        window.location.hash = target;
+                    });
+                });
+
+            };
+
+
+
+
+            /* Initialize
+             * ------------------------------------------------------ */
+            (function ssInit() {
+
+                ssSmoothScroll();
+
+            })();
+        })(jQuery);
     </script>
 </body>
 
