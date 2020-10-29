@@ -9,4 +9,4 @@ Roctoid is the online multiplayer Rock Paper Scissors. Roctoid Uses AI model to 
 
 ## Playable on :
 
-[rocktoid.tech](www.rocktoid.tech)
+[rocktoid.tech](http://rocktoid.tech/)
